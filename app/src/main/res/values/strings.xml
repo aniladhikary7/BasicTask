@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">TailwebsTask</string>
+    <string name="splash_icon">Splash_icon</string>
+    <string name="university_logo">UNIVERSITY LOGO</string>
+    <string name="a_world_of_opportunity">A world of Opportunity</string>
+    <string name="make_your_university_life">Make your university life the best it can be, in a world of opportunity</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="log_in">Log in</string>
+
+
+    <string name="next">Next</string>
+    <string name="be_part">Be part of our opportunity</string>
+    <string name="perfect_app">Perfect your application</string>
+    <string name="pg_open">Postgraduate applications open</string>
+    <string name="be_part_text">Our world never stops moving</string>
+    <string name="perfect_app_text">Everything you need to know about applying</string>
+    <string name="pg_open_text">Join our world</string>
+    <string name="title_activity_landing">Tailwebs</string>
+
+</resources>
