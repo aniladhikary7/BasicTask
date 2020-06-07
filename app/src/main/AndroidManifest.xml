@@ -9,10 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".addSubject.AddSubjectActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/add_subject_title"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".landingPage.LandingActivity"
-            android:label="@string/title_activity_landing"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".signInPage.SignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".welcomeScreen.WelcomeScreen"
             android:screenOrientation="portrait"
@@ -27,7 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".landingPage.MainActivity" />
+        <activity android:name=".landingPage.MainActivity"/>
     </application>
 
 </manifest>

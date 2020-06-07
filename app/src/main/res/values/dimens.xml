@@ -11,4 +11,7 @@
     <dimen name="dimen_32dp">32dp</dimen>
     <dimen name="dimen_26sp">26sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="dimen_4dp">4dp</dimen>
+    <dimen name="dimen_20sp">20sp</dimen>
+    <dimen name="dimen_1dp">1dp</dimen>
 </resources>

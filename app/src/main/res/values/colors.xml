@@ -7,4 +7,5 @@
     <color name="white">#FFFFFF</color>
     <color name="gray_num_highlight">#5B5B5B</color>
     <color name="gray">#efefef</color>
+    <color name="rv_row_bg">#FA5A27</color>
 </resources>

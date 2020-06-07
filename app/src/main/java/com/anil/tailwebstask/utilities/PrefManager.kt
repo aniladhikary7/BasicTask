@@ -43,13 +43,16 @@ class PrefManager(context: Context) {
     }
 
     companion object {
-        private var mPrefManager: PrefManager? = null
+        @Volatile
+        private lateinit var mPrefManager: PrefManager
         private const val PREFERENCE_FILE_KEY =
             "com.anil.tailwebstask.PREFERENCE_FILE_KEY"
 
-        fun getInstance(context: Context): PrefManager? {
-            if (mPrefManager == null) {
-                mPrefManager = PrefManager(context)
+        fun getInstance(context: Context): PrefManager {
+            synchronized(PrefManager::class) {
+                if (!::mPrefManager.isInitialized) {
+                    mPrefManager = PrefManager(context)
+                }
             }
             return mPrefManager
         }
