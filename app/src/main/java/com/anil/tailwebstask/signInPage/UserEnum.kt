@@ -5,5 +5,6 @@ enum class UserEnum {
     FAILURE,
     EMPTY,
     VALID_EMAIL,
-    VALID_NUMBER
+    VALID_NUMBER,
+    UPDATE
 }

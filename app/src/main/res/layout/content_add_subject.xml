@@ -2,7 +2,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -90,6 +89,17 @@
                     android:layout_height="@dimen/dimen_56dp"
                     android:layout_margin="@dimen/dimen_8dp"
                     android:text="@string/submit"
+                    android:textAllCaps="false"
+                    android:background="@drawable/gradient_btn"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:id="@+id/update_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_56dp"
+                    android:layout_margin="@dimen/dimen_8dp"
+                    android:text="@string/update"
                     android:textAllCaps="false"
                     android:background="@drawable/gradient_btn"
                     android:foreground="?android:attr/selectableItemBackground"

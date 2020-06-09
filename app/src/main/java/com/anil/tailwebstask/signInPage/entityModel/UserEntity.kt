@@ -20,12 +20,7 @@ data class User(
     val password: String
 )
 
-@Entity(tableName = "marks_table",
-    foreignKeys = arrayOf(
-        ForeignKey(entity = User::class,
-            parentColumns = arrayOf("mobile_number"),
-            childColumns = arrayOf("mobile_number"),
-            onDelete = ForeignKey.CASCADE)))
+@Entity(tableName = "marks_table")
 data class Marks(
     @NonNull
     @PrimaryKey(autoGenerate = false)
@@ -36,5 +31,5 @@ data class Marks(
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "marks")
-    val marks: String
+    val marks: Int
 )

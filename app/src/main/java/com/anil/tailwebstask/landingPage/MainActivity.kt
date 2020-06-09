@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,13 +18,16 @@ import com.anil.tailwebstask.R
 import com.anil.tailwebstask.addSubject.AddSubjectActivity
 import com.anil.tailwebstask.addSubject.viewModel.AddSubjectViewModel
 import com.anil.tailwebstask.landingPage.adapter.MainActivityAdapter
+import com.anil.tailwebstask.landingPage.listeners.EditListenerInterface
 import com.anil.tailwebstask.signInPage.entityModel.Marks
 import com.anil.tailwebstask.startUpPage.SplashScreen
 import com.anil.tailwebstask.utilities.InjectUtils
 import com.anil.tailwebstask.utilities.PrefManager
+import com.anil.tailwebstask.utilities.UtilConstants
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() , LifecycleOwner{
+
+class MainActivity : AppCompatActivity() , LifecycleOwner, EditListenerInterface{
 
     private lateinit var emptyTextView: TextView
     private lateinit var recyclerView: RecyclerView
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() , LifecycleOwner{
             }
         })
 
-        myAdapter = MainActivityAdapter(itemList)
+        myAdapter = MainActivityAdapter(itemList, this)
         recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
@@ -73,7 +75,14 @@ class MainActivity : AppCompatActivity() , LifecycleOwner{
 
     private fun floatingButtonListener(){
         fab.setOnClickListener { view ->
-            startActivity(Intent(this, AddSubjectActivity::class.java))
+            val startAddSubject =
+                Intent(this, AddSubjectActivity::class.java ).apply {
+                    putExtra(UtilConstants.INTENT_START_UPDATE, "add")
+                    putExtra(UtilConstants.INTENT_START_NAME, "")
+                    putExtra(UtilConstants.INTENT_START_SUBJECT, "")
+                    putExtra(UtilConstants.INTENT_START_SCORE, "")
+                }
+            startActivity(startAddSubject)
         }
     }
 
@@ -93,8 +102,7 @@ class MainActivity : AppCompatActivity() , LifecycleOwner{
     }
 
     private fun displayExitAlert(message: String) {
-        val builder =
-            AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this)
         val alertDialog = builder.create()
         builder.setMessage(message)
             .setPositiveButton(
@@ -111,4 +119,16 @@ class MainActivity : AppCompatActivity() , LifecycleOwner{
             .setCancelable(false)
             .show()
     }
+
+    override fun onEditClick(marks: Marks) {
+        val startAddSubject =
+        Intent(this, AddSubjectActivity::class.java ).apply {
+            putExtra(UtilConstants.INTENT_START_UPDATE, "update")
+            putExtra(UtilConstants.INTENT_START_NAME, marks.name)
+            putExtra(UtilConstants.INTENT_START_SUBJECT, marks.subject)
+            putExtra(UtilConstants.INTENT_START_SCORE, "" + marks.marks)
+        }
+        startActivity(startAddSubject)
+    }
+
 }

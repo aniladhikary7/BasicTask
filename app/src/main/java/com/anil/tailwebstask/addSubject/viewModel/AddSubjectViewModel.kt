@@ -12,9 +12,15 @@ class AddSubjectViewModel internal constructor(
         super.onCleared()
     }
 
-    fun addASubject(marks: Marks) = addSubjectRepository.insertUser(marks)
-
     var getList: LiveData<List<Marks>> = addSubjectRepository.fetchAllSubjects()
 
     fun fetchDataFillStatus() = addSubjectRepository.dataFillStatus
+
+    fun fetchMatchedRow(name: String, subject: String, number: String, score: Int) =
+        addSubjectRepository.insertSubject(name, subject, number, score)
+
+    fun fetchUpdateRow(score: Int, name: String, subject: String) =
+        addSubjectRepository.editExistingMarks(score, name, subject)
+
+    fun fetchUpdateStatus() = addSubjectRepository.dataUpdateStatus
 }

@@ -3,18 +3,22 @@ package com.anil.tailwebstask.landingPage.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anil.tailwebstask.R
+import com.anil.tailwebstask.landingPage.listeners.EditListenerInterface
 import com.anil.tailwebstask.signInPage.entityModel.Marks
 
-class MainActivityAdapter(private var listItem: List<Marks>):
+class MainActivityAdapter(private var listItem: List<Marks>,
+                          private var editListenerInterface: EditListenerInterface):
     RecyclerView.Adapter<MainActivityAdapter.MyViewHolder>(){
 
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
         val nameTv: TextView = view.findViewById(R.id.rv_name)
         val subjectTv: TextView = view.findViewById(R.id.rv_subject)
         val marksTv: TextView = view.findViewById(R.id.rv_marks)
+        val editBtn: ImageView = view.findViewById(R.id.edit_row_iv)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -30,7 +34,10 @@ class MainActivityAdapter(private var listItem: List<Marks>):
             with(holder){
                 nameTv.text = itemModel.name
                 subjectTv.text = itemModel.subject
-                marksTv.text = itemModel.marks
+                marksTv.text = " " + itemModel.marks
+                editBtn.setOnClickListener {
+                    editListenerInterface.onEditClick(itemModel)
+                }
             }
         }
     }

@@ -36,13 +36,26 @@ class AddSubjectRepository private constructor(private val addSubjectDao: AddSub
     val dataFillStatus: LiveData<SingleLiveEvent<UserEnum>>
         get() = _dataFillStatus
 
-    fun insertUser(marks: Marks){
-        if (marks.mobileNumber.isNotEmpty() &&
-            marks.name.isNotEmpty()  &&
-            marks.subject.isNotEmpty() &&
-            marks.marks.isNotEmpty()){
+    fun insertSubject(name: String, subject: String, number: String, score: Int){
+        if (name.isNotEmpty() &&
+            subject.isNotEmpty()  &&
+            number.isNotEmpty() &&
+            score != null){
             appExecutors.diskIO().execute {
-                addSubjectDao.insert(marks)
+                val marks: Marks = addSubjectDao.getMatchedRow(name, subject)
+                if (!marks?.name.isNullOrEmpty() && !marks?.subject.isNullOrEmpty()) {
+                    val objName: String = marks.name
+                    val objSubject: String = marks.subject
+                    val objNumber: String = marks.mobileNumber
+                    val objScore: Int = marks.marks.plus(score)
+                    val obj: Marks = Marks(objSubject, objNumber, objName, objScore)
+                    addSubjectDao.updateMarkRow(obj)
+                    _dataFillStatus.postValue(SingleLiveEvent(UserEnum.UPDATE))
+                }else{
+                    val obj = Marks(subject,number, name, score)
+                    addSubjectDao.insert(obj)
+                    _dataFillStatus.postValue(SingleLiveEvent(UserEnum.SUCCESS))
+                }
                 _dataFillStatus.postValue(SingleLiveEvent(UserEnum.SUCCESS))
             }
         }else{
@@ -52,4 +65,19 @@ class AddSubjectRepository private constructor(private val addSubjectDao: AddSub
 
     fun fetchAllSubjects() = addSubjectDao.getListFromBB(prefManager.getString(
         UtilConstants.USER_PHONE_NUMBER,""))
+
+    private val _dataUpdateStatus = MutableLiveData<SingleLiveEvent<UserEnum>>()
+    val dataUpdateStatus: LiveData<SingleLiveEvent<UserEnum>>
+        get() = _dataUpdateStatus
+
+    fun editExistingMarks(score: Int, name: String, subject: String){
+        if (score != null){
+            appExecutors.diskIO().execute{
+                addSubjectDao.updateMarks(score, name, subject)
+                _dataUpdateStatus.postValue(SingleLiveEvent(UserEnum.SUCCESS))
+            }
+        }else{
+            _dataUpdateStatus.postValue(SingleLiveEvent(UserEnum.FAILURE))
+        }
+    }
 }

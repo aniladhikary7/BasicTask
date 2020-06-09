@@ -36,8 +36,10 @@
     <string name="are_you_sure">Are you sure you want log out?</string>
     <string name="add_details">Add details</string>
     <string name="enter_fields">Enter all the details!</string>
+    <string name="enter_value">Enter some value</string>
     <string name="wrong_credentials">Wrong credentials</string>
     <string name="invalid_mail">Enter the valid e-mail id!</string>
     <string name="invalid_number">Enter the valid mobile number!</string>
+    <string name="update">Update</string>
 
 </resources>
