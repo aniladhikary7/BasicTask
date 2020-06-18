@@ -3,6 +3,7 @@ package com.anil.tailwebstask.landingPage
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -71,6 +72,9 @@ class MainActivity : AppCompatActivity() , LifecycleOwner, EditListenerInterface
         initViews()
         initialise()
         floatingButtonListener()
+        //Log.d("MainActivity", ""+prefManager.getBool(UtilConstants.SESSION,false))
+        //Log.d("MainActivity", ""+prefManager.getString(UtilConstants.USER_PHONE_NUMBER,
+        //    UtilConstants.UPDATE_STRING))
     }
 
     private fun floatingButtonListener(){

@@ -73,24 +73,16 @@ class SignUpRepository private constructor(
                 val user: User = signUpDao.getUser(number, password)
                 if (!user?.mobileNumber.isNullOrEmpty() && !user?.password.isNullOrEmpty()) {
                     _findUserLiveData.postValue(SingleLiveEvent(UserEnum.SUCCESS))
-                }else{
+                } else {
                     _findUserLiveData.postValue(SingleLiveEvent(UserEnum.EMPTY))
                 }
             }
-        }else{
+        } else {
             _findUserLiveData.postValue(SingleLiveEvent(UserEnum.FAILURE))
         }
     }
 
-        private val _findUserLiveData = MutableLiveData<SingleLiveEvent<UserEnum>>()
-        val findUserLiveData: LiveData<SingleLiveEvent<UserEnum>>
+    private val _findUserLiveData = MutableLiveData<SingleLiveEvent<UserEnum>>()
+    val findUserLiveData: LiveData<SingleLiveEvent<UserEnum>>
         get() = _findUserLiveData
-
-        private fun pushResponse(user: User?) {
-            if (!user?.mobileNumber.isNullOrEmpty() && !user?.password.isNullOrEmpty()) {
-                _findUserLiveData.postValue(SingleLiveEvent(UserEnum.SUCCESS))
-            } else {
-                _findUserLiveData.postValue(SingleLiveEvent(UserEnum.FAILURE))
-            }
-        }
-    }
+}

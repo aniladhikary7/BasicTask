@@ -31,7 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".landingPage.MainActivity"/>
+        <activity android:name=".landingPage.MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

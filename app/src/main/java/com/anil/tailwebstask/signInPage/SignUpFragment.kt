@@ -2,6 +2,7 @@ package com.anil.tailwebstask.signInPage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -115,7 +116,6 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         val email: String = emailEt.text?.trim().toString()
         val phone: String = numberEt.text?.trim().toString()
         val password: String = passwordEt.text?.trim().toString()
-        prefManager.setString(UtilConstants.USER_PHONE_NUMBER, phone)
         var user = User(phone,name,email,password)
         viewModel.saveUserInfo(user)
 
@@ -123,6 +123,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             when (it.getContentIfNotHandled()) {
                 UserEnum.SUCCESS -> {
                     prefManager.setBool(UtilConstants.SESSION, true)
+                    prefManager.setString(UtilConstants.USER_PHONE_NUMBER, phone)
                     startActivity(Intent(context, MainActivity::class.java))
                 }
                 UserEnum.EMPTY ->{
@@ -147,7 +148,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             when (it.getContentIfNotHandled()) {
                 UserEnum.SUCCESS -> {
                     prefManager.setBool(UtilConstants.SESSION, true)
-                    prefManager.setString(UtilConstants.USER_PHONE_NUMBER, number)
+                    prefManager.setString(UtilConstants.USER_PHONE_NUMBER, "" + number)
                     startActivity(Intent(context, MainActivity::class.java))
                 }
                 UserEnum.EMPTY -> {

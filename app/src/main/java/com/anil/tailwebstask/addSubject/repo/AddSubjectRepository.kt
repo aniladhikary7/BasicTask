@@ -1,5 +1,6 @@
 package com.anil.tailwebstask.addSubject.repo
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.anil.tailwebstask.database.AddSubjectDao
@@ -36,18 +37,19 @@ class AddSubjectRepository private constructor(private val addSubjectDao: AddSub
     val dataFillStatus: LiveData<SingleLiveEvent<UserEnum>>
         get() = _dataFillStatus
 
-    fun insertSubject(name: String, subject: String, number: String, score: Int){
+    fun insertSubject(name: String, subject: String, number: String, score: String){
         if (name.isNotEmpty() &&
             subject.isNotEmpty()  &&
             number.isNotEmpty() &&
-            score != null){
+            score.isNotEmpty()){
             appExecutors.diskIO().execute {
-                val marks: Marks = addSubjectDao.getMatchedRow(name, subject)
-                if (!marks?.name.isNullOrEmpty() && !marks?.subject.isNullOrEmpty()) {
+                val marks: Marks = addSubjectDao.getMatchedRow(number, subject)
+                if (!marks?.mobileNumber.isNullOrEmpty() && !marks?.subject.isNullOrEmpty()) {
                     val objName: String = marks.name
                     val objSubject: String = marks.subject
                     val objNumber: String = marks.mobileNumber
-                    val objScore: Int = marks.marks.plus(score)
+                    val objScore: String = ""+marks.marks.toInt().plus(score.toInt())
+                    Log.d("AddSubjectRepository", ""+objScore)
                     val obj: Marks = Marks(objSubject, objNumber, objName, objScore)
                     addSubjectDao.updateMarkRow(obj)
                     _dataFillStatus.postValue(SingleLiveEvent(UserEnum.UPDATE))

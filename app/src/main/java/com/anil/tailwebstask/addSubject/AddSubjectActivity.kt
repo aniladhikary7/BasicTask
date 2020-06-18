@@ -2,6 +2,7 @@ package com.anil.tailwebstask.addSubject
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
@@ -110,9 +111,10 @@ class AddSubjectActivity : AppCompatActivity(), View.OnClickListener{
     private fun addSubject(){
         var name: String = addName.text.toString().trim()
         var subject: String = addSubject.text.toString().trim()
-        var score: Int = Integer.parseInt(addMarks.text.toString().trim())
+        var score: String = addMarks.text.toString().trim()
         var phoneNumber: String = ""+prefManager.getString(UtilConstants
             .USER_PHONE_NUMBER, "1234")
+        Log.e("AddSubject", phoneNumber)
         viewModel.fetchMatchedRow(name, subject, phoneNumber,score)
 
         viewModel.fetchDataFillStatus().observe(this, Observer {

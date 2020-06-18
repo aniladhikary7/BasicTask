@@ -16,7 +16,7 @@ class AddSubjectViewModel internal constructor(
 
     fun fetchDataFillStatus() = addSubjectRepository.dataFillStatus
 
-    fun fetchMatchedRow(name: String, subject: String, number: String, score: Int) =
+    fun fetchMatchedRow(name: String, subject: String, number: String, score: String) =
         addSubjectRepository.insertSubject(name, subject, number, score)
 
     fun fetchUpdateRow(score: Int, name: String, subject: String) =

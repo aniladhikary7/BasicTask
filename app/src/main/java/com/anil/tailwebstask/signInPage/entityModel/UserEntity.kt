@@ -20,10 +20,17 @@ data class User(
     val password: String
 )
 
-@Entity(tableName = "marks_table")
+@Entity(tableName = "marks_table",
+    foreignKeys = arrayOf(
+        ForeignKey(entity = User::class,
+            parentColumns = arrayOf("mobile_number"),
+            childColumns = arrayOf("mobile_number"),
+            onDelete = ForeignKey.CASCADE)))
 data class Marks(
     @NonNull
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "subjectId")
+    var subjectId: Int = 0,
     @ColumnInfo(name = "subject")
     val subject: String,
     @ColumnInfo(name = "mobile_number")
@@ -31,5 +38,8 @@ data class Marks(
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "marks")
-    val marks: Int
-)
+    val marks: String
+){
+    constructor(subject: String, mobileNumber: String, name: String, marks: String):
+            this(0, subject, mobileNumber,name,marks)
+}
