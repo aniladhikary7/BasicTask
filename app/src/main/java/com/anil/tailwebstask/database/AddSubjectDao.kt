@@ -15,8 +15,8 @@ interface AddSubjectDao {
     @Query("SELECT * FROM marks_table WHERE mobile_number = :mobileNumber")
     fun getListFromBB(mobileNumber: String?): LiveData<List<Marks>>
 
-    @Query("SELECT * FROM marks_table WHERE mobile_number = :mobileNumber AND subject = :subject")
-    fun getMatchedRow(mobileNumber: String, subject: String) : Marks
+    @Query("SELECT * FROM marks_table WHERE mobile_number = :mobileNumber AND (subject = :subject AND name = :name )")
+    fun getMatchedRow(mobileNumber: String, subject: String, name: String) : Marks
 
     @Update
     fun updateMarkRow(marks: Marks)

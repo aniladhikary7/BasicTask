@@ -43,13 +43,12 @@ class AddSubjectRepository private constructor(private val addSubjectDao: AddSub
             number.isNotEmpty() &&
             score.isNotEmpty()){
             appExecutors.diskIO().execute {
-                val marks: Marks = addSubjectDao.getMatchedRow(number, subject)
+                val marks: Marks = addSubjectDao.getMatchedRow(number, subject, name)
                 if (!marks?.mobileNumber.isNullOrEmpty() && !marks?.subject.isNullOrEmpty()) {
                     val objName: String = marks.name
                     val objSubject: String = marks.subject
                     val objNumber: String = marks.mobileNumber
                     val objScore: String = ""+marks.marks.toInt().plus(score.toInt())
-                    Log.d("AddSubjectRepository", ""+objScore)
                     val obj: Marks = Marks(objSubject, objNumber, objName, objScore)
                     addSubjectDao.updateMarkRow(obj)
                     _dataFillStatus.postValue(SingleLiveEvent(UserEnum.UPDATE))

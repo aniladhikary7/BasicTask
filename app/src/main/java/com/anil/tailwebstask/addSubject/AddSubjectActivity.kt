@@ -114,7 +114,6 @@ class AddSubjectActivity : AppCompatActivity(), View.OnClickListener{
         var score: String = addMarks.text.toString().trim()
         var phoneNumber: String = ""+prefManager.getString(UtilConstants
             .USER_PHONE_NUMBER, "1234")
-        Log.e("AddSubject", phoneNumber)
         viewModel.fetchMatchedRow(name, subject, phoneNumber,score)
 
         viewModel.fetchDataFillStatus().observe(this, Observer {
